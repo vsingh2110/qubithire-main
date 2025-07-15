@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QubitHire Dashboard - Wireframe</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .wireframe-box {
+            @apply bg-gray-100 border-2 border-dashed border-gray-300 p-4 text-center text-gray-600 font-medium;
+        }
+        .wireframe-section {
+            @apply bg-white border border-gray-200 rounded-lg p-4 shadow-sm;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    
+    <!-- Main Layout Container -->
+    <div class="flex h-screen">
+        
+        <!-- Sidebar -->
+        <div class="w-64 bg-white border-r border-gray-200 flex-shrink-0">
+            <!-- Logo Area -->
+            <div class="h-16 border-b border-gray-200 flex items-center justify-center">
+                <div class="wireframe-box h-8 w-32">
+                    LOGO: QubitHire
+                </div>
+            </div>
+            
+            <!-- Navigation Menu -->
+            <div class="p-4 space-y-2">
+                <div class="text-xs text-gray-500 uppercase tracking-wider mb-4">Navigation</div>
+                
+                <!-- Main Nav Items -->
+                <div class="space-y-1">
+                    <div class="wireframe-box h-10">Dashboard Overview</div>
+                    <div class="wireframe-box h-10">Resume Screening</div>
+                    <div class="wireframe-box h-10">Candidate Management</div>
+                    <div class="wireframe-box h-10">Interview Scheduling</div>
+                    <div class="wireframe-box h-10">Offer Management</div>
+                    <div class="wireframe-box h-10">Email Communication</div>
+                    <div class="wireframe-box h-10">Document Management</div>
+                    <div class="wireframe-box h-10">Analytics & Reports</div>
+                    <div class="wireframe-box h-10">CRM Integration</div>
+                    <div class="wireframe-box h-10">Settings</div>
+                </div>
+                
+                <!-- Quick Stats Widget -->
+                <div class="mt-8 wireframe-section">
+                    <div class="text-xs text-gray-500 mb-2">Today's Progress</div>
+                    <div class="space-y-2">
+                        <div class="wireframe-box h-6 text-xs">Resumes: 24</div>
+                        <div class="wireframe-box h-6 text-xs">Interviews: 8</div>
+                        <div class="wireframe-box h-6 text-xs">Offers: 3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Main Content Area -->
+        <div class="flex-1 flex flex-col overflow-hidden">
+            
+            <!-- Header -->
+            <div class="h-16 bg-white border-b border-gray-200 flex items-center justify-between px-6">
+                <!-- Left: Breadcrumb/Title -->
+                <div class="wireframe-box h-8 w-48">
+                    PAGE TITLE / BREADCRUMB
+                </div>
+                
+                <!-- Center: Search -->
+                <div class="wireframe-box h-8 w-64">
+                    SEARCH BAR
+                </div>
+                
+                <!-- Right: User Actions -->
+                <div class="flex items-center space-x-4">
+                    <div class="wireframe-box h-8 w-24">Notifications</div>
+                    <div class="wireframe-box h-8 w-20">Dark Mode</div>
+                    <div class="wireframe-box h-8 w-24">User Profile</div>
+                </div>
+            </div>
+            
+            <!-- Status Bar -->
+            <div class="h-8 bg-blue-50 border-b border-blue-200 flex items-center justify-between px-6 text-xs">
+                <div class="wireframe-box h-4 w-32">System Status</div>
+                <div class="wireframe-box h-4 w-48">Active Jobs: 12 | Pending: 8 | Interviews: 5</div>
+            </div>
+            
+            <!-- Main Content -->
+            <div class="flex-1 overflow-auto p-6">
+                
+                <!-- Dashboard Overview Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
+                    <!-- Key Metrics -->
+                    <div class="wireframe-section">
+                        <div class="text-sm text-gray-500 mb-2">Metric Card 1</div>
+                        <div class="wireframe-box h-16">
+                            Total Applications<br/>
+                            <span class="text-xs">1,247 (+12%)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="wireframe-section">
+                        <div class="text-sm text-gray-500 mb-2">Metric Card 2</div>
+                        <div class="wireframe-box h-16">
+                            Active Jobs<br/>
+                            <span class="text-xs">23 (+3%)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="wireframe-section">
+                        <div class="text-sm text-gray-500 mb-2">Metric Card 3</div>
+                        <div class="wireframe-box h-16">
+                            Interviews Scheduled<br/>
+                            <span class="text-xs">18 (+8%)</span>
+                        </div>
+                    </div>
+                    
+                    <div class="wireframe-section">
+                        <div class="text-sm text-gray-500 mb-2">Metric Card 4</div>
+                        <div class="wireframe-box h-16">
+                            Time to Hire<br/>
+                            <span class="text-xs">18 days (-2)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Main Content Grid -->
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                    
+                    <!-- Left Column: Recent Activity -->
+                    <div class="lg:col-span-2 space-y-6">
+                        
+                        <!-- Resume Screening Section -->
+                        <div class="wireframe-section">
+                            <div class="text-sm text-gray-500 mb-4">Resume Screening & AI Analysis</div>
+                            <div class="space-y-3">
+                                <div class="wireframe-box h-12">
+                                    Upload Area: Drop resumes or sync from email
+                                </div>
+                                <div class="grid grid-cols-3 gap-3">
+                                    <div class="wireframe-box h-20">
+                                        Job Selection<br/>
+                                        <span class="text-xs">Choose position</span>
+                                    </div>
+                                    <div class="wireframe-box h-20">
+                                        AI Processing<br/>
+                                        <span class="text-xs">Analysis status</span>
+                                    </div>
+                                    <div class="wireframe-box h-20">
+                                        Results Table<br/>
+                                        <span class="text-xs">Scored candidates</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Interview Management -->
+                        <div class="wireframe-section">
+                            <div class="text-sm text-gray-500 mb-4">Interview Scheduling & Management</div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="wireframe-box h-32">
+                                    Calendar View<br/>
+                                    <span class="text-xs">Interview slots & scheduling</span>
+                                </div>
+                                <div class="wireframe-box h-32">
+                                    Interview List<br/>
+                                    <span class="text-xs">Upcoming interviews & details</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Recent Activity Feed -->
+                        <div class="wireframe-section">
+                            <div class="text-sm text-gray-500 mb-4">Recent Activity Feed</div>
+                            <div class="space-y-2">
+                                <div class="wireframe-box h-8 text-xs">Resume screened: John Smith (Score: 85)</div>
+                                <div class="wireframe-box h-8 text-xs">Interview scheduled: Sarah Johnson</div>
+                                <div class="wireframe-box h-8 text-xs">Offer letter sent: Mike Davis</div>
+                                <div class="wireframe-box h-8 text-xs">Email template updated: Rejection Letter</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                    <!-- Right Column: Sidebar Widgets -->
+                    <div class="lg:col-span-1 space-y-6">
+                        
+                        <!-- Top Candidates -->
+                        <div class="wireframe-section">
+                            <div class="text-sm text-gray-500 mb-4">Top Candidates</div>
+                            <div class="space-y-3">
+                                <div class="wireframe-box h-12 text-xs">
+                                    Alice Chen - Senior Dev (Score: 94)
+                                </div>
+                                <div class="wireframe-box h-12 text-xs">
+                                    Robert Kim - Data Scientist (91)
+                                </div>
+                                <div class="wireframe-box h-12 text-xs">
+                                    Emma Wilson - UX Designer (89)
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Offer Management -->
+                        <div class="wireframe-section">
+                            <div class="text-sm text-gray-500 mb-4">Offer Management</div>
+                            <div class="space-y-2">
+                                <div class="wireframe-box h-8 text-xs">Pending Offers: 5</div>
+                                <div class="wireframe-box h-8 text-xs">Accepted: 12</div>
+                                <div class="wireframe-box h-8 text-xs">Expiring Soon: 2</div>
+                                <div class="wireframe-box h-16 text-xs">
+                                    Quick Actions:<br/>
+                                    Generate Offer | Send Email
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Email & Communication -->
+                        <div class="wireframe-section">
+                            <div class="text-sm text-gray-500 mb-4">Email Communication</div>
+                            <div class="space-y-2">
+                                <div class="wireframe-box h-8 text-xs">Inbox: 12 new emails</div>
+                                <div class="wireframe-box h-8 text-xs">Templates: 8 active</div>
+                                <div class="wireframe-box h-8 text-xs">Scheduled: 3 pending</div>
+                                <div class="wireframe-box h-12 text-xs">
+                                    Email Actions:<br/>
+                                    Compose | Templates
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Document Management -->
+                        <div class="wireframe-section">
+                            <div class="text-sm text-gray-500 mb-4">Document & BGV</div>
+                            <div class="space-y-2">
+                                <div class="wireframe-box h-8 text-xs">Documents: 156 files</div>
+                                <div class="wireframe-box h-8 text-xs">BGV Status: 8 pending</div>
+                                <div class="wireframe-box h-8 text-xs">Verification: 12 complete</div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+                
+                <!-- Bottom Section: Analytics Preview -->
+                <div class="mt-8 wireframe-section">
+                    <div class="text-sm text-gray-500 mb-4">Analytics Dashboard Preview</div>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="wireframe-box h-24">
+                            Hiring Funnel Chart<br/>
+                            <span class="text-xs">Applications → Hires conversion</span>
+                        </div>
+                        <div class="wireframe-box h-24">
+                            Department Performance<br/>
+                            <span class="text-xs">Engineering, Design, Product</span>
+                        </div>
+                        <div class="wireframe-box h-24">
+                            Source Analysis<br/>
+                            <span class="text-xs">LinkedIn, Indeed, Referrals</span>
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+    
+    <!-- Mobile Responsive Note -->
+    <div class="fixed bottom-4 right-4 bg-blue-100 p-3 rounded-lg border border-blue-300 text-xs text-blue-800 max-w-xs lg:hidden">
+        📱 Mobile: Sidebar collapses to hamburger menu, cards stack vertically
+    </div>
+    
+</body>
+</html> 
