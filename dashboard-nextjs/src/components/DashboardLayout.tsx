@@ -25,7 +25,6 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = ({ children }) => {
     <div className={`${darkMode ? 'dark' : ''} bg-gray-100 min-h-screen w-full`}>
       {/* Header and NavigationBar at the very top */}
       <Header 
-        toggleSidebar={toggleSidebar}
         darkMode={darkMode}
         toggleDarkMode={toggleDarkMode}
       />

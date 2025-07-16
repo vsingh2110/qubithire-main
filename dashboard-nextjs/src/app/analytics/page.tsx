@@ -2,7 +2,7 @@
 
 import React from 'react';
 import DashboardLayout from '@/components/DashboardLayout';
-import { ChartBarIcon, ChartPieIcon, PresentationChartBarIcon } from '@heroicons/react/24/outline';
+import { ChartBarIcon } from '@heroicons/react/24/outline';
 
 const Analytics: React.FC = () => {
   return (

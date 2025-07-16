@@ -11,17 +11,22 @@ import {
   BriefcaseIcon,
   EnvelopeIcon,
   FolderIcon,
-  ChartBarIcon,
   CogIcon,
   PencilSquareIcon,
   DocumentArrowDownIcon,
   UserGroupIcon,
-  ChevronDownIcon,
   PlusIcon
 } from '@heroicons/react/24/outline';
 
+interface MenuItem {
+  name: string;
+  path: string;
+  icon?: React.ComponentType<{ className?: string }>;
+  count?: number;
+}
+
 // Dropdown menu data for each tab
-const menuData: Record<string, Array<{name: string; path: string; icon?: React.ComponentType<any>; count?: number}>> = {
+const menuData: Record<string, MenuItem[]> = {
   'Resume Screening': [
     { name: 'Upload & Configure', path: '/resume-screening?upload_configure' },
     { name: 'Screening Process', path: '/resume-screening?screening_process' },
@@ -176,8 +181,9 @@ const NavigationBar: React.FC = () => {
       const navWidth = navBarRef.current.offsetWidth;
       let total = 0;
       let lastVisible = navigationItems.length;
-      const tempVisible = [];
-      const tempOverflow = [];
+      const tempVisible: typeof navigationItems = [];
+      const tempOverflow: typeof navigationItems = [];
+      
       for (let i = 0; i < navigationItems.length; i++) {
         const tab = tabRefs.current[navigationItems[i].name];
         if (!tab) continue;
@@ -187,6 +193,7 @@ const NavigationBar: React.FC = () => {
           break;
         }
       }
+      
       for (let i = 0; i < navigationItems.length; i++) {
         if (i < lastVisible) tempVisible.push(navigationItems[i]);
         else tempOverflow.push(navigationItems[i]);
@@ -194,6 +201,7 @@ const NavigationBar: React.FC = () => {
       setVisibleTabs(tempVisible);
       setOverflowTabs(tempOverflow);
     };
+    
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -203,6 +211,7 @@ const NavigationBar: React.FC = () => {
   const handleTabMouseEnter = (item: typeof navigationItems[0]) => {
     if (menuData[item.name]) setOpenDropdown(item.name);
   };
+
   const handleTabMouseLeave = (item: typeof navigationItems[0]) => {
     // Delay to allow moving into dropdown
     setTimeout(() => {
@@ -211,15 +220,18 @@ const NavigationBar: React.FC = () => {
       }
     }, 100);
   };
+
   const handleTabClick = (item: typeof navigationItems[0], e: React.MouseEvent) => {
     if (menuData[item.name]) {
       e.preventDefault();
       setOpenDropdown(openDropdown === item.name ? null : item.name);
     }
   };
+
   const handleDropdownMouseLeave = () => {
     setOpenDropdown(null);
   };
+
   const handleDropdownItemClick = (path: string) => {
     router.push(path);
     setOpenDropdown(null);
@@ -260,6 +272,7 @@ const NavigationBar: React.FC = () => {
             </div>
           );
         })}
+        
         {/* More dropdown for overflow tabs */}
         {overflowTabs.length > 0 && (
           <div
@@ -277,6 +290,7 @@ const NavigationBar: React.FC = () => {
           </div>
         )}
       </div>
+      
       {/* Absolutely positioned dropdown below nav, left-aligned with tab */}
       {openDropdown && ((menuData[openDropdown] && openDropdown !== 'More') || openDropdown === 'More') && (
         <div
@@ -293,41 +307,47 @@ const NavigationBar: React.FC = () => {
         >
           <div className="flex flex-col py-2">
             {openDropdown === 'More'
-              ? overflowTabs.map((item) => (
-                  <button
-                    key={item.name}
-                    onClick={() => router.push(item.path)}
-                    className="flex items-center w-full px-6 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-200"
-                  >
-                    <item.icon className="h-4 w-4 mr-2 text-gray-400" />
-                    <span className="text-sm font-medium">{item.name}</span>
-                  </button>
-                ))
-              : menuData[openDropdown]?.map((option, idx) => (
-                  <button
-                    key={option.name}
-                    onClick={() => handleDropdownItemClick(option.path)}
-                    className="flex items-center justify-between w-full px-6 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-200"
-                  >
-                    <div className="flex items-center space-x-3">
-                      {option.icon ? (
-                        <option.icon className="h-4 w-4 text-green-600 dark:text-green-400" />
-                      ) : (
-                        <BriefcaseIcon className="h-4 w-4 text-gray-400" />
+              ? overflowTabs.map((item) => {
+                  const Icon = item.icon;
+                  return (
+                    <button
+                      key={item.name}
+                      onClick={() => handleDropdownItemClick(item.path)}
+                      className="flex items-center w-full px-6 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-200"
+                    >
+                      <Icon className="h-4 w-4 mr-2 text-gray-400" />
+                      <span className="text-sm font-medium">{item.name}</span>
+                    </button>
+                  );
+                })
+              : menuData[openDropdown].map((option) => {
+                  const Icon = option.icon;
+                  return (
+                    <button
+                      key={option.name}
+                      onClick={() => handleDropdownItemClick(option.path)}
+                      className="flex items-center justify-between w-full px-6 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-gray-700 dark:text-gray-200"
+                    >
+                      <div className="flex items-center space-x-3">
+                        {Icon ? (
+                          <Icon className="h-4 w-4 text-green-600 dark:text-green-400" />
+                        ) : (
+                          <BriefcaseIcon className="h-4 w-4 text-gray-400" />
+                        )}
+                        <span className="text-sm font-medium">{option.name}</span>
+                      </div>
+                      {option.count !== undefined && (
+                        <span className={`py-0.5 px-2 text-xs rounded-full ${
+                          option.name === 'Expiring Soon' && option.count > 0
+                            ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
+                            : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300'
+                        }`}>
+                          {option.count}
+                        </span>
                       )}
-                      <span className="text-sm font-medium">{option.name}</span>
-                    </div>
-                    {option.count !== undefined && (
-                      <span className={`py-0.5 px-2 text-xs rounded-full ${
-                        option.name === 'Expiring Soon' && option.count > 0
-                          ? 'bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200'
-                          : 'bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300'
-                      }`}>
-                        {option.count}
-                      </span>
-                    )}
-                  </button>
-                ))}
+                    </button>
+                  );
+                })}
           </div>
         </div>
       )}

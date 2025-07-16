@@ -8,12 +8,8 @@ import {
   CalendarIcon,
   BriefcaseIcon,
   ChartBarIcon,
-  ClockIcon,
-  CheckCircleIcon,
-  XCircleIcon,
   ArrowTrendingUpIcon,
   ArrowTrendingDownIcon,
-  EyeIcon,
   StarIcon,
   PlusIcon
 } from '@heroicons/react/24/outline';
@@ -21,7 +17,27 @@ import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, Legend, Resp
 import { DndProvider, useDrag, useDrop } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-const chartOptions = [
+interface ChartOption {
+  type: 'pie' | 'bar';
+  label: string;
+  dataKey: string;
+}
+
+interface Chart {
+  id: number;
+  type: 'pie' | 'bar';
+  label: string;
+  dataKey: string;
+}
+
+interface DraggableChartProps {
+  chart: Chart;
+  index: number;
+  moveChart: (dragIndex: number, hoverIndex: number) => void;
+  removeChart: (id: number) => void;
+}
+
+const chartOptions: ChartOption[] = [
   { type: 'pie', label: 'Jobs Pie', dataKey: 'jobs' },
   { type: 'bar', label: 'Jobs Bar', dataKey: 'jobs' },
   { type: 'pie', label: 'Candidates Pie', dataKey: 'candidates' },
@@ -52,7 +68,7 @@ const sampleData: Record<string, Array<{ name: string; value: number }>> = {
 };
 
 // Draggable Chart Component
-const DraggableChart = ({ chart, index, moveChart, removeChart }: any) => {
+const DraggableChart: React.FC<DraggableChartProps> = ({ chart, index, moveChart, removeChart }) => {
   const [{ isDragging }, drag] = useDrag({
     type: 'chart',
     item: { id: chart.id, index },
@@ -63,7 +79,7 @@ const DraggableChart = ({ chart, index, moveChart, removeChart }: any) => {
 
   const [, drop] = useDrop({
     accept: 'chart',
-    hover: (item: any, monitor) => {
+    hover: (item: { id: number; index: number }, monitor) => {
       if (!monitor.isOver({ shallow: true })) return;
       if (item.index === index) return;
       moveChart(item.index, index);
@@ -102,7 +118,7 @@ const DraggableChart = ({ chart, index, moveChart, removeChart }: any) => {
                 outerRadius={80}
                 label
               >
-                {sampleData[chart.dataKey].map((entry: any, index: number) => (
+                {sampleData[chart.dataKey].map((entry, index) => (
                   <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
                 ))}
               </Pie>
@@ -223,14 +239,14 @@ const Home: React.FC = () => {
     }
   ];
 
-  const [charts, setCharts] = useState([
+  const [charts, setCharts] = useState<Chart[]>([
     { id: 1, type: 'pie', label: 'Jobs Pie', dataKey: 'jobs' },
     { id: 2, type: 'bar', label: 'Candidates Bar', dataKey: 'candidates' },
   ]);
   const [nextId, setNextId] = useState(3);
   const [addMenuOpen, setAddMenuOpen] = useState(false);
 
-  const handleAddChart = (option: any) => {
+  const handleAddChart = (option: ChartOption) => {
     setCharts([...charts, { ...option, id: nextId }]);
     setNextId(nextId + 1);
     setAddMenuOpen(false);
@@ -279,7 +295,7 @@ const Home: React.FC = () => {
                 Home
               </h1>
               <p className="text-gray-600 dark:text-gray-400 mt-1">
-                Welcome back! Here's what's happening with your recruitment process today.
+                Welcome back! Here&apos;s what&apos;s happening with your recruitment process today.
               </p>
             </div>
             <div className="relative">
@@ -292,7 +308,7 @@ const Home: React.FC = () => {
               </button>
               {addMenuOpen && (
                 <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded shadow-lg z-10">
-                  {chartOptions.map((option, idx) => (
+                  {chartOptions.map((option) => (
                     <button
                       key={option.label}
                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"

@@ -4,12 +4,12 @@ import React from 'react';
 import { BellIcon, UserCircleIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 
 interface HeaderProps {
-  toggleSidebar: () => void;
+  toggleSidebar?: () => void;
   darkMode: boolean;
   toggleDarkMode: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ toggleSidebar, darkMode, toggleDarkMode }) => {
+const Header: React.FC<HeaderProps> = ({ darkMode, toggleDarkMode }) => {
   return (
     <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 w-full">
       <div className="flex items-center justify-between h-14 px-4 sm:px-6 lg:px-8 w-full">

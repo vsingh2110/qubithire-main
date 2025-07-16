@@ -55,7 +55,7 @@ interface SidebarProps {
   toggleSidebar: () => void;
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
+const Sidebar: React.FC<SidebarProps> = ({ isOpen }) => {
   const pathname = usePathname();
   const isActive = (path: string) => pathname === path;
 
@@ -75,8 +75,8 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
       <div className="p-4 border-b border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-900">
         <h2 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase mb-2 tracking-wide">Reminders</h2>
         <div className="space-y-2">
-          {reminders.map((rem, idx) => (
-            <div key={idx} className="flex items-center space-x-2 text-sm text-gray-700 dark:text-gray-200">
+          {reminders.map((rem) => (
+            <div key={rem.label} className="flex items-center space-x-2 text-sm text-gray-700 dark:text-gray-200">
               <rem.icon className={`h-4 w-4 ${rem.color}`} />
               <span>{rem.label}</span>
               <span className="ml-auto font-bold text-xs bg-gray-200 dark:bg-gray-700 rounded px-2 py-0.5">{rem.count}</span>
@@ -88,7 +88,7 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, toggleSidebar }) => {
       <div className="flex-1 overflow-y-auto p-4">
         <h2 className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase mb-2 tracking-wide">Navigation Shortcuts</h2>
         <div className="space-y-4">
-          {shortcutSections.map((section, idx) => (
+          {shortcutSections.map((section) => (
             <div key={section.header}>
               <div className="text-xs font-bold text-gray-400 dark:text-gray-500 mb-1 pl-2">{section.header}</div>
               <div className="space-y-1">
