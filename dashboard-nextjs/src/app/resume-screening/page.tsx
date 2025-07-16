@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import {
   DocumentTextIcon,
@@ -16,7 +16,8 @@ import {
   ArrowPathIcon
 } from '@heroicons/react/24/outline';
 
-const ResumeScreening = () => {
+// Separate component that uses useSearchParams
+const ResumeScreeningContent = () => {
   const searchParams = useSearchParams();
   const [isScreening, setIsScreening] = useState(false);
   const [selectedJob, setSelectedJob] = useState('');
@@ -74,7 +75,7 @@ const ResumeScreening = () => {
     }
   ];
 
-  const getStatusColor = (status) => {
+  const getStatusColor = (status: string) => {
     switch (status) {
       case 'recommended':
         return 'bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
@@ -87,7 +88,7 @@ const ResumeScreening = () => {
     }
   };
 
-  const getScoreColor = (score) => {
+  const getScoreColor = (score: number) => {
     if (score >= 80) return 'text-green-600 dark:text-green-400';
     if (score >= 60) return 'text-yellow-600 dark:text-yellow-400';
     return 'text-red-600 dark:text-red-400';
@@ -403,6 +404,34 @@ const ResumeScreening = () => {
       {/* Content based on active section */}
       {renderContent()}
     </div>
+  );
+};
+
+// Loading fallback component
+const ResumeScreeningFallback = () => (
+  <div className="w-full">
+    <div className="mb-8">
+      <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Resume Screening</h1>
+      <p className="text-gray-600 dark:text-gray-400 mt-2">
+        AI-powered resume analysis and candidate ranking
+      </p>
+    </div>
+    <div className="bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 p-6">
+      <div className="animate-pulse">
+        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/4 mb-4"></div>
+        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2 mb-2"></div>
+        <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+      </div>
+    </div>
+  </div>
+);
+
+// Main component with Suspense wrapper
+const ResumeScreening = () => {
+  return (
+    <Suspense fallback={<ResumeScreeningFallback />}>
+      <ResumeScreeningContent />
+    </Suspense>
   );
 };
 
