@@ -1,13 +1,11 @@
 'use client';
 
 import React from 'react';
-import DashboardLayout from '@/components/DashboardLayout';
 import { BriefcaseIcon, PlusIcon, ClockIcon, CheckIcon } from '@heroicons/react/24/outline';
 
 const Offers: React.FC = () => {
   return (
-    <DashboardLayout>
-      <div className="w-full">
+    <div className="w-full">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Offers</h1>
@@ -86,7 +84,6 @@ const Offers: React.FC = () => {
           </div>
         </div>
       </div>
-    </DashboardLayout>
   );
 };
 

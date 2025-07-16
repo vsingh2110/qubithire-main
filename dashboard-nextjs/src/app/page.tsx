@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import DashboardLayout from '@/components/DashboardLayout';
 import {
   UserIcon,
   DocumentTextIcon,
@@ -285,8 +284,7 @@ const Home: React.FC = () => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <DashboardLayout>
-        <div className="space-y-6">
+      <div className="space-y-6">
         {/* Header with Add Chart button */}
         <div className="mb-8">
           <div className="flex items-center justify-between">
@@ -503,7 +501,6 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
-      </DashboardLayout>
     </DndProvider>
   );
 };

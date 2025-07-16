@@ -212,7 +212,7 @@ const NavigationBar: React.FC = () => {
     if (menuData[item.name]) setOpenDropdown(item.name);
   };
 
-  const handleTabMouseLeave = (item: typeof navigationItems[0]) => {
+  const handleTabMouseLeave = () => {
     // Delay to allow moving into dropdown
     setTimeout(() => {
       if (!dropdownRef.current?.matches(':hover') && !navBarRef.current?.matches(':hover')) {
@@ -221,12 +221,7 @@ const NavigationBar: React.FC = () => {
     }, 100);
   };
 
-  const handleTabClick = (item: typeof navigationItems[0], e: React.MouseEvent) => {
-    if (menuData[item.name]) {
-      e.preventDefault();
-      setOpenDropdown(openDropdown === item.name ? null : item.name);
-    }
-  };
+
 
   const handleDropdownMouseLeave = () => {
     setOpenDropdown(null);
@@ -250,7 +245,7 @@ const NavigationBar: React.FC = () => {
               key={item.name}
               className="relative"
               onMouseEnter={() => hasDropdown && handleTabMouseEnter(item)}
-              onMouseLeave={() => hasDropdown && handleTabMouseLeave(item)}
+              onMouseLeave={() => hasDropdown && handleTabMouseLeave()}
               style={{ display: 'inline-block' }}
               ref={el => {
                 tabRefs.current[item.name] = el;
@@ -258,7 +253,6 @@ const NavigationBar: React.FC = () => {
             >
               <Link
                 href={item.path}
-                onClick={hasDropdown ? (e) => handleTabClick(item, e) : undefined}
                 className={`flex items-center space-x-1 px-3 py-2 mt-1 mb-0.5 rounded-t-md border-b-2 text-sm font-medium whitespace-nowrap transition-colors
                   ${isActive(item.path) || openDropdown === item.name
                     ? 'border-blue-600 bg-white dark:bg-gray-800 text-blue-700 dark:text-blue-300 shadow-sm'

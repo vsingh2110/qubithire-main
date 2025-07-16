@@ -1,13 +1,11 @@
 'use client';
 
 import React from 'react';
-import DashboardLayout from '@/components/DashboardLayout';
 import { ChartBarIcon } from '@heroicons/react/24/outline';
 
 const Analytics: React.FC = () => {
   return (
-    <DashboardLayout>
-      <div className="w-full">
+    <div className="w-full">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Analytics</h1>
@@ -33,7 +31,6 @@ const Analytics: React.FC = () => {
           </div>
         </div>
       </div>
-    </DashboardLayout>
   );
 };
 

@@ -1,13 +1,11 @@
 'use client';
 
 import React from 'react';
-import DashboardLayout from '@/components/DashboardLayout';
 import { DocumentMagnifyingGlassIcon, ArrowUpTrayIcon, AdjustmentsHorizontalIcon } from '@heroicons/react/24/outline';
 
 const ResumeScreening: React.FC = () => {
   return (
-    <DashboardLayout>
-      <div className="w-full">
+    <div className="w-full">
         {/* Header */}
         <div className="mb-8">
           <h1 className="text-3xl font-bold text-gray-900 dark:text-gray-100">Resume Screening</h1>
@@ -72,7 +70,6 @@ const ResumeScreening: React.FC = () => {
           </div>
         </div>
       </div>
-    </DashboardLayout>
   );
 };
 
